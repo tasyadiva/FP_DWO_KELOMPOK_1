@@ -1,4 +1,5 @@
 Final Project Pengembangan Data Warehouse dan Dashboard Adventureworks 
+===================================================================================
 Dibuat oleh Kelompok 1
 Program Studi Sistem Informasi
 Fakultas Ilmu Komputer
@@ -8,7 +9,6 @@ Tasya Diva Fortuna Hadi (21082010088)
 Nama Anggota :
 Widya Pratiwi (21082010093)
 Kharisma Agustya Z.S (21082010120)
-====================================================================
 
 Instruksi cara menginstal dan menjalankan aplikasi :
 1. Download database server xampp versi 3.3.0 terlebih dahulu kemudian install
