@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<Schema name="produksi">
+<!--
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == You must accept the terms of that agreement to use this software.
+  ==
+  == Copyright (C) 2000-2005 Julian Hyde
+  == Copyright (C) 2005-2011 Pentaho and others
+  == All Rights Reserved.
+  -->
+
+<!-- Shared dimensions -->
+
+  
+
+<!-- Sales -->
+<Cube name="Production" defaultMeasure="Amount">
+  <!-- Use annotations to provide translations of this cube's caption and
+       description into German and French. Use of annotations in this manner is
+       experimental and unsupported; just for testing right now. -->
+  
+  <Table name="fakta_production"/>
+
+    
+  <Dimension name="Product" foreignKey ="productID">
+      <Hierarchy hasAll="true" allMemberName="All Products" primaryKey ="productID">
+      <Table name="product"/>
+      <Level name="Product" column="name"/>
+      </Hierarchy>
+      
+  </Dimension>
+
+ 
+  <Dimension name="Time" foreignKey="timeID">
+    <Hierarchy hasAll="true" allMemberName="All Times" primaryKey="timeID">
+      <Table name="timepurchasing" />
+      <Level name="Year" column="tahun" type="Numeric" uniqueMembers="true"
+          levelType="TimeYears"/>
+      <Level name="Month" column="bulan" uniqueMembers="false" type="Numeric"
+          levelType="TimeMonths"/>
+      <Level name="Date" column="tanggal" uniqueMembers="false" type="Numeric"
+          levelType="TimeDays"/>
+    </Hierarchy>
+   
+  </Dimension>
+
+  <Dimension name="Location" foreignKey = "locationID">
+    <Hierarchy hasAll="true" allMemberName="All Location" primaryKey ="locationID">
+      <Table name="location" />
+      <Level name="Name" column="name"/>
+    </Hierarchy>
+  </Dimension>
+  
+
+  <Measure name="Order Qty" column="orderQty" aggregator="sum"
+      formatString="Standard"/>
+  <Measure name="Hours" column="hours" aggregator="avg"
+      formatString="Standard"/>
+  <Measure name="Cost" column="cost" aggregator="sum"
+      formatString="Standard"/>
+
+  
+  
+
+</Cube>
+
+</Schema>

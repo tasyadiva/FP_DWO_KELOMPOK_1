@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<Schema name="purchasing">
+<!--
+  == This software is subject to the terms of the Eclipse Public License v1.0
+  == Agreement, available at the following URL:
+  == http://www.eclipse.org/legal/epl-v10.html.
+  == You must accept the terms of that agreement to use this software.
+  ==
+  == Copyright (C) 2000-2005 Julian Hyde
+  == Copyright (C) 2005-2011 Pentaho and others
+  == All Rights Reserved.
+  -->
+
+<!-- Shared dimensions -->
+
+  
+
+<!-- Sales -->
+<Cube name="Purchase" defaultMeasure="Amount">
+  <!-- Use annotations to provide translations of this cube's caption and
+       description into German and French. Use of annotations in this manner is
+       experimental and unsupported; just for testing right now. -->
+  
+  <Table name="fakta_purchasing"/>
+
+    
+  <Dimension name="Product" foreignKey ="productID">
+      <Hierarchy hasAll="true" allMemberName="All Productss" primaryKey ="productID">
+      <Table name="product"/>
+      <Level name="Product" column="name"/>
+      </Hierarchy>
+      
+  </Dimension>
+
+ 
+  <Dimension name="Time" foreignKey="timeID">
+    <Hierarchy hasAll="true" allMemberName="All Times" primaryKey="timeID">
+      <Table name="timepurchasing" />
+      <Level name="Year" column="tahun" type="Numeric" uniqueMembers="true"
+          levelType="TimeYears"/>
+      <Level name="Month" column="bulan" uniqueMembers="false" type="Numeric"
+          levelType="TimeMonths"/>
+      <Level name="Date" column="tanggal" uniqueMembers="false" type="Numeric"
+          levelType="TimeDays"/>
+    </Hierarchy>
+   
+  </Dimension>
+
+  <Dimension name="Vendor" foreignKey = "vendorID">
+    <Hierarchy hasAll="true" allMemberName="All Vendor" primaryKey ="vendorID">
+      <Table name="vendor" />
+      <Level name="Name" column="nama"/>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="Shipping" foreignKey="shipMethodID">
+    <Hierarchy  hasAll  ="true" allMemberName="All Shipping" primaryKey  = "shipMethodID">
+        <Table name="shippingmethod"/>
+        <Level name="Name" column="name"/>
+    </Hierarchy>
+  </Dimension>
+
+  
+
+  <Measure name="Jumlah" column="jumlah" aggregator="sum"
+      formatString="Standard"/>
+  <Measure name="Sub Total" column="subtotal" aggregator="sum"
+      formatString="Standard"/>
+  <Measure name="Tax Amt" column="TaxAmt" aggregator="avg"
+      formatString="Standard"/>
+  <Measure name="Freight" column="Freight" aggregator="avg"
+      formatString="Standard"/>
+  <Measure name="Total Due" column="TotalDue" aggregator="sum"
+      formatString="Standard"/>
+
+  
+  
+
+</Cube>
+
+</Schema>
